@@ -29,7 +29,7 @@ public class SerieController {
 
     @GetMapping("/lancamentos")
     public List<SerieDTO> obterLancamentos() {
-        return service.obterLacamentos();
+        return service.obterLancamentos();
     }
 
     @GetMapping("/{id}")

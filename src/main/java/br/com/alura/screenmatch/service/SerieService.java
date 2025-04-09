@@ -33,8 +33,8 @@ public class SerieService {
 
     }
 
-    public List<SerieDTO> obterLacamentos() {
-        return converteDados(repositorio.findTop5ByOrderByAvaliacaoDesc());
+    public List<SerieDTO> obterLancamentos() {
+        return converteDados(repositorio.lancamentosMaisRecentes());
     }
 
     public SerieDTO obterPorId(Long id) {
