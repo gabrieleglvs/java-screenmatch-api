@@ -17,8 +17,6 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
 
     List<Serie> findTop5ByOrderByAvaliacaoDesc();
 
-    List<Serie> findByGenero(Categoria categoria);
-
     List<Serie> findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(int totalTemporadas, Double avaliacao);
 
     //JPQL
@@ -42,4 +40,6 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
 
     @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s.id = :id AND e.temporada = :numeroTemporada")
     List<Episodio> obterEpisodiosPorTemporada(Long id, int numeroTemporada);
+
+    List<Serie> findByGenero(Categoria categoria);
 }
