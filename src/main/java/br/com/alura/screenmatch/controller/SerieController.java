@@ -25,6 +25,11 @@ public class SerieController {
         return service.obterTodasAsSeries();
     }
 
+    @GetMapping("/{nomeSerie}")
+    public String obterSerie(@PathVariable String nomeSerie) {
+        return service.obterSerie(nomeSerie);
+    }
+
     @GetMapping("/top5")
     public List<SerieDTO> obterTop5Series() {
         return service.obterTop5Series();

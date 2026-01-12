@@ -3,6 +3,7 @@ package br.com.alura.screenmatch.service;
 import br.com.alura.screenmatch.dto.EpisodioDTO;
 import br.com.alura.screenmatch.dto.SerieDTO;
 import br.com.alura.screenmatch.model.Categoria;
+import br.com.alura.screenmatch.model.DadosSerie;
 import br.com.alura.screenmatch.model.Episodio;
 import br.com.alura.screenmatch.model.Serie;
 import br.com.alura.screenmatch.repository.SerieRepository;
@@ -15,9 +16,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class SerieService {
-
     @Autowired
     private SerieRepository repositorio;
+    private ConsumoApi consumo = new ConsumoApi();
+    private ConverteDados conversor = new ConverteDados();
+    private final String ENDERECO = "https://www.omdbapi.com/?t=";
+    private final String API_KEY = "&apikey=6585022c";
 
     private List<SerieDTO> converteDados(List<Serie> serie) {
         return serie.stream()
@@ -84,5 +88,14 @@ public class SerieService {
         return episodios.stream()
                 .map(e -> new EpisodioDTO(e.getTemporada(), e.getTitulo(), e.getNumeroEpisodio()))
                 .collect(Collectors.toList());
+    }
+
+    public String obterSerie(String nomeSerie) {
+        var json = consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
+        //DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+        //Serie serie = new Serie(dados);
+        //dadosSeries.add(dados);
+        //repositorio.save(serie);
+        return json;
     }
 }
